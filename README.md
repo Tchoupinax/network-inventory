@@ -1,5 +1,7 @@
 # network-inventory
 
+![Screenshot of the app](./.github/docs/overview.png)
+
 ## How to use the project (only locally for the moment!)
 
 - Firstly, start project with `yarn watch` (`yarn install` is required for the first time).
