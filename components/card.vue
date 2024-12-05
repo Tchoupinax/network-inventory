@@ -7,15 +7,17 @@
       {{ network.name }}
       <span
         v-if="conflicts.filter((c) => c.networkA === network.name).length > 0"
-        class="px-2 rounded-xl bg-red-500 absolute ml-48 text-xs"
+        class="text-xs absolute right-0 w-28 xl:w-16 xl:hover:w-40 h-full flex justify-center items-center bg-red-500 p-1"
       >
-        conflict with {{ conflicts[0].networkB }}
+        conflict
+        {{ conflicts.filter((c) => c.networkA === network.name)[0]?.networkB }}
       </span>
       <span
         v-if="conflicts.filter((c) => c.networkB === network.name).length > 0"
-        class="px-2 rounded-xl bg-red-500 absolute ml-48 text-xs"
+        class="text-xs absolute right-0 w-28 xl:w-16 xl:hover:w-40 h-full flex justify-center items-center bg-red-500 p-1"
       >
-        conflict with {{ conflicts[0].networkA }}
+        conflict
+        {{ conflicts.filter((c) => c.networkB === network.name)[0]?.networkA }}
       </span>
     </div>
 
