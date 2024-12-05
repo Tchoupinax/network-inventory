@@ -1,3 +1,5 @@
+import ip from "ip";
+
 import { intToIp } from "./int-to-ip";
 import { ipToInt } from "./ip-to-int";
 
@@ -25,8 +27,8 @@ export function calculateNetworkDetails(cidr: string): Details {
   const broadcastInt = baseIpInt + numAddresses - 1;
 
   const subnetMask = intToIp((0xffffffff << (32 - maskBits)) >>> 0);
-  const firstIp = intToIp(baseIpInt + 1);
-  const lastIp = intToIp(broadcastInt - 1);
+
+  const data = ip.cidrSubnet(cidr);
 
   return {
     cidr,
@@ -35,9 +37,10 @@ export function calculateNetworkDetails(cidr: string): Details {
     numAddresses,
     subnetMask,
     broadcast: intToIp(broadcastInt),
-    firstIP: maskBits < 31 ? firstIp : null,
-    lastIP: maskBits < 31 ? lastIp : null,
-    usableRange: maskBits < 31 ? `${firstIp} - ${lastIp}` : "N/A",
+    firstIP: data.firstAddress,
+    lastIP: data.lastAddress,
+    usableRange:
+      maskBits < 31 ? `${data.firstAddress} - ${data.lastAddress}` : "N/A",
     baseIpInt,
     broadcastInt,
   };

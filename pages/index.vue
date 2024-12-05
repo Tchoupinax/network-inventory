@@ -69,6 +69,16 @@ export default {
           this.badNetwork = network;
         }
       }
+
+      // Upgrade selected network if panel is open
+      if (this.selectedNetwork) {
+        const selectedNetwork = this.networks
+          .filter((network) => network.name === this.selectedNetwork.name)
+          .at(0);
+        if (selectedNetwork) {
+          this.selectedNetwork = selectedNetwork;
+        }
+      }
     },
   },
 };
