@@ -237,7 +237,6 @@ body {
 
 .details-item .label {
   font-weight: 600;
-  color: #555;
   font-size: 16px;
 }
 

@@ -15,6 +15,7 @@ export type Details = {
   prefix: string;
   subnetMask: string;
   usableRange: string;
+  vlan: string | null;
 };
 
 export function calculateNetworkDetails(cidr: string): Details {
