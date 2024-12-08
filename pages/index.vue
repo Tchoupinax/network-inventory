@@ -1,57 +1,113 @@
 <template>
-  <div class="w-full flex justify-center">
-    <div
-      v-if="badNetwork != null"
-      id="notification"
-      class="notification"
-      :class="{
-        show: badNetwork != null,
-      }"
-      s
-    >
-      ⚠️ {{ badNetwork.cidr }} is not a private network ({{ badNetwork.name }})
+  <div class="flex-col">
+    <div class="flex justify-end items-end mr-16 mt-4">
+      <button
+        class="hover:bg-orange-200 text-gray-800 font-bold py-2 px-4 rounded-l"
+        :class="{
+          'bg-orange-300': mode === 'Networks',
+          'bg-gray-300 ': mode === 'Devices',
+        }"
+        @click="mode = 'Networks'"
+      >
+        Networks
+      </button>
+      <button
+        class="hover:bg-orange-200 text-gray-800 font-bold py-2 px-4 rounded-r"
+        :class="{
+          'bg-orange-300': mode === 'Devices',
+          'bg-gray-300 ': mode === 'Networks',
+        }"
+        @click="mode = 'Devices'"
+      >
+        Devices
+      </button>
     </div>
 
-    <div
-      class="container flex w-full"
-      :class="{
-        'mt-16': badNetwork != null,
-      }"
-    >
-      <Card
-        v-for="network of networks"
-        :key="network.id"
-        :network="network"
-        :conflicts="conflicts"
-        @click="
-          selectedNetwork = network;
-          detailsOpened = true;
-        "
+    <div class="w-full flex justify-center mt-4">
+      <div
+        v-if="badNetwork != null"
+        id="notification"
+        class="notification"
+        :class="{
+          show: badNetwork != null,
+        }"
+        s
+      >
+        ⚠️ {{ badNetwork.cidr }} is not a private network ({{
+          badNetwork.name
+        }})
+      </div>
+
+      <div
+        v-if="mode === 'Networks'"
+        class="container flex w-full"
+        :class="{
+          'mt-16': badNetwork != null,
+        }"
+      >
+        <Card
+          v-for="network of networks"
+          :key="network.name"
+          :network="network"
+          :conflicts="conflicts"
+          @click="
+            selectedNetwork = network;
+            detailsOpened = true;
+          "
+        />
+      </div>
+
+      <div v-if="mode === 'Devices'" class="w-full mx-32">
+        <Table
+          :headers="['', 'Name', 'Ip', 'Mac Address']"
+          :rows="
+            networks
+              .map((n) =>
+                n.devices?.map((d) => {
+                  d.color = n.color;
+                  return d;
+                })
+              )
+              .filter((d) => d)
+              .flat()
+          "
+        />
+      </div>
+
+      <SidePanel
+        v-if="selectedNetwork"
+        :network="selectedNetwork"
+        :opened="detailsOpened"
+        @close="detailsOpened = false"
       />
     </div>
-
-    <div id="sidePanel" class="side-panel"></div>
-
-    <SidePanel
-      :network="selectedNetwork"
-      :opened="detailsOpened"
-      @close="detailsOpened = false"
-    />
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import type { Network } from "~/types/network";
+
 import { checkConflicts } from "../functions/check-conflicts";
 import { isPrivateCIDR } from "../functions/is-private-network";
 
+type Store = {
+  mode: "Networks" | "Devices";
+  badNetwork: Network | null;
+  selectedNetwork: Network | null;
+  detailsOpened: boolean;
+  networks: Array<Network>;
+  conflicts: Array<{ networkA: string; networkB: string }>;
+};
+
 export default {
-  data() {
+  data(): Store {
     return {
       badNetwork: null,
       detailsOpened: false,
       networks: [],
-      selectedNetwork: {},
+      selectedNetwork: null,
       conflicts: [],
+      mode: "Networks",
     };
   },
   mounted() {
@@ -73,7 +129,7 @@ export default {
       // Upgrade selected network if panel is open
       if (this.selectedNetwork) {
         const selectedNetwork = this.networks
-          .filter((network) => network.name === this.selectedNetwork.name)
+          .filter((network) => network.name === this.selectedNetwork?.name)
           .at(0);
         if (selectedNetwork) {
           this.selectedNetwork = selectedNetwork;
@@ -181,7 +237,6 @@ body {
 
 .details-item .label {
   font-weight: 600;
-  color: #555;
   font-size: 16px;
 }
 

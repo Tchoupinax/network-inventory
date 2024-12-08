@@ -23,7 +23,7 @@ export function isIpInCidr(ipAddress: string, cidr: string): boolean {
       binaryCidrBase.substring(0, prefixLength)
     );
   } catch (e) {
-    console.error("Invalid IP or CIDR format:", e.message);
+    console.error("Invalid IP or CIDR format:", e);
     return false;
   }
 }
