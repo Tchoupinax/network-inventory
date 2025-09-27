@@ -99,6 +99,8 @@ type Store = {
   conflicts: Array<{ networkA: string; networkB: string }>;
 };
 
+const $route = useRoute();
+
 export default {
   data(): Store {
     return {
@@ -111,8 +113,31 @@ export default {
     };
   },
   mounted() {
-    this.fetchData();
-    setInterval(this.fetchData, 1000);
+    console.log($route.query);
+    if ($route.query.data) {
+      const decodeData = JSON.parse(atob($route.query.data as string));
+      this.networks = decodeData;
+
+      this.conflicts = checkConflicts(this.networks);
+      for (const network of this.networks) {
+        if (!isPrivateCIDR(network.cidr)) {
+          this.badNetwork = network;
+        }
+      }
+
+      // Upgrade selected network if panel is open
+      if (this.selectedNetwork) {
+        const selectedNetwork = this.networks
+          .filter((network) => network.name === this.selectedNetwork?.name)
+          .at(0);
+        if (selectedNetwork) {
+          this.selectedNetwork = selectedNetwork;
+        }
+      }
+    } else {
+      this.fetchData();
+      setInterval(this.fetchData, 1000);
+    }
   },
   methods: {
     async fetchData() {

@@ -15,10 +15,7 @@
           :key="index"
           class="even:bg-slate-200 odd:bg-slate-100"
         >
-          <div
-            class="w-4 h-12"
-            :style="`background-color: ${row?.color};`"
-          ></div>
+          <td class="w-4 h-12" :style="`background-color: ${row?.color};`"></td>
 
           <td class="w-1/3 px-6 text-center">
             {{ row.name }}
