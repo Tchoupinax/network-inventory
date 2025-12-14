@@ -99,8 +99,6 @@ type Store = {
   conflicts: Array<{ networkA: string; networkB: string }>;
 };
 
-const $route = useRoute();
-
 export default {
   data(): Store {
     return {
@@ -113,7 +111,7 @@ export default {
     };
   },
   mounted() {
-    console.log($route.query);
+    const $route = useRoute();
     if ($route.query.data) {
       const decodeData = JSON.parse(atob($route.query.data as string));
       this.networks = decodeData;

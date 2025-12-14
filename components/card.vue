@@ -40,7 +40,9 @@
           <span class="value">{{ details.broadcast }}</span>
         </div>
         <div class="details-item">
-          <span class="label" :class="{ 'text-blue-600': network.vlan }"
+          <span
+            class="label"
+            :class="{ 'text-blue-600 text-bold underline': network.vlan }"
             >VLAN:</span
           >
           <span class="value">{{ network.vlan ?? "N/A" }}</span>
