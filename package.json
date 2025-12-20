@@ -30,11 +30,11 @@
     "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
     "eslint-config-tchoupinax": "1.1.0",
-    "eslint-plugin-perfectionist": "4.15.1",
+    "eslint-plugin-perfectionist": "5.0.0",
     "eslint-plugin-prettier": "5.5.4",
     "eslint-plugin-typescript-sort-keys": "3.3.0",
     "prettier": "3.7.4",
-    "vitest": "4.0.15",
+    "vitest": "4.0.16",
     "vue-tsc": "3.1.8"
   }
 }
