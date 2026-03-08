@@ -18,4 +18,4 @@ jobs:
         with:
           node-version: 25
 
-      - run: yarn && yarn build
+      - run: pnpm install && pnpm build
