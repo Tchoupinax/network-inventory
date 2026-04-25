@@ -5,14 +5,14 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       Lora: {
-        wght: [400],
+        wght: [400]
       },
       Poppins: {
-        wght: [300, 400, 600],
+        wght: [300, 400, 600]
       },
       Roboto: {
-        wght: [400, 500],
-      },
-    },
-  },
+        wght: [400, 500]
+      }
+    }
+  }
 });

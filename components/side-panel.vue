@@ -72,31 +72,31 @@ export default {
   props: {
     opened: {
       required: true,
-      type: Boolean,
+      type: Boolean
     },
     network: {
       required: true,
-      type: Object,
-    },
+      type: Object
+    }
   },
   emits: ["close"],
   mounted() {
-    document.addEventListener("keydown", (event) => {
+    document.addEventListener("keydown", event => {
       if (event.key === "Escape" || event.code === "Escape") {
         this.$emit("close");
       }
     });
   },
   unmounted() {
-    document.removeEventListener("keydown", (event) => {
+    document.removeEventListener("keydown", event => {
       if (event.key === "Escape" || event.code === "Escape") {
         this.$emit("close");
       }
     });
   },
   methods: {
-    isIpInCidr,
-  },
+    isIpInCidr
+  }
 };
 </script>
 

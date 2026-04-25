@@ -1,13 +1,14 @@
-import { defineEventHandler } from "h3";
 import { existsSync, readFileSync } from "node:fs";
+
+import { defineEventHandler } from "h3";
 
 import type { Network } from "../../types/network";
 
 export default defineEventHandler(() => {
   const path = process.cwd() + "/local.json";
   if (existsSync(path)) {
-    const data = JSON.parse(readFileSync(path, "utf-8"));
-    return data;
+    const data: unknown = JSON.parse(readFileSync(path, "utf-8"));
+    return data as Array<Network>;
   }
 
   return [

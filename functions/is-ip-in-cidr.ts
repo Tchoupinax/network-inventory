@@ -1,6 +1,10 @@
 export function isIpInCidr(ipAddress: string, cidr: string): boolean {
   try {
     const [cidrBase, prefixLengthStr] = cidr.split("/");
+    if (!cidrBase || !prefixLengthStr) {
+      throw new Error("Invalid CIDR format");
+    }
+
     const prefixLength = parseInt(prefixLengthStr, 10);
 
     if (prefixLength < 0 || prefixLength > 32) {
@@ -10,7 +14,7 @@ export function isIpInCidr(ipAddress: string, cidr: string): boolean {
     const ipToBinary = (ip: string) => {
       return ip
         .split(".")
-        .map((octet) => parseInt(octet, 10).toString(2).padStart(8, "0"))
+        .map(octet => parseInt(octet, 10).toString(2).padStart(8, "0"))
         .join("");
     };
 

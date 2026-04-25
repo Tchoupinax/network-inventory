@@ -6,7 +6,7 @@
     "build": "nuxt build",
     "generate": "nuxt generate",
     "lint": "pnpm lint:eslint && pnpm lint:vue:check",
-    "lint:eslint": "eslint . --fix",
+    "lint:eslint": "nuxt prepare && eslint . --fix",
     "lint:vue:check": "vue-tsc --noEmit",
     "postinstall": "nuxt prepare",
     "preview": "nuxt preview",

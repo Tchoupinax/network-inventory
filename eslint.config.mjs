@@ -1,3 +1,3 @@
-import { eslintTypescript } from "eslint-config-tchoupinax";
+import { eslintNuxt } from "eslint-config-tchoupinax";
 
-export default eslintTypescript;
+export default eslintNuxt;
