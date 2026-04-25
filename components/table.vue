@@ -39,12 +39,12 @@ export default {
   props: {
     headers: {
       type: Array,
-      required: true,
+      required: true
     },
     rows: {
       type: Array,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 };
 </script>

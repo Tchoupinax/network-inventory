@@ -19,6 +19,10 @@ export type Details = {
 
 export function calculateNetworkDetails(cidr: string): Details {
   const [baseIp, prefix] = cidr.split("/");
+  if (!baseIp || !prefix) {
+    throw new Error(`Invalid CIDR: ${cidr}`);
+  }
+
   const maskBits = parseInt(prefix, 10);
   const hostBits = 32 - maskBits;
   const numAddresses = 2 ** hostBits;

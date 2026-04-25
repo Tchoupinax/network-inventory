@@ -1,14 +1,22 @@
 import { cidrSubnet } from "ip";
 
+export type Conflict = { networkA: string; networkB: string };
+
 export function checkConflicts(
-  networks: Array<{ cidr: string; name: string }>
-): Array<{ networkA: string; networkB: string }> {
-  const conflicts: Array<{ networkA: string; networkB: string }> = [];
+  networks: Array<{ cidr: string; name: string }>,
+): Array<Conflict> {
+  const conflicts: Array<Conflict> = [];
 
   for (let i = 0; i < networks.length; i++) {
     for (let j = i + 1; j < networks.length; j++) {
-      const net1 = cidrSubnet(networks[i].cidr);
-      const net2 = cidrSubnet(networks[j].cidr);
+      const networkA = networks[i];
+      const networkB = networks[j];
+      if (!networkA || !networkB) {
+        continue;
+      }
+
+      const net1 = cidrSubnet(networkA.cidr);
+      const net2 = cidrSubnet(networkB.cidr);
 
       // Check if either network contains the other's start or end address
       if (
@@ -18,8 +26,8 @@ export function checkConflicts(
         net2.contains(net1.broadcastAddress)
       ) {
         conflicts.push({
-          networkA: networks[i].name,
-          networkB: networks[j].name,
+          networkA: networkA.name,
+          networkB: networkB.name,
         });
       }
     }

@@ -85,10 +85,9 @@
 </template>
 
 <script lang="ts">
-import type { Network } from "~/types/network";
-
 import { checkConflicts } from "../functions/check-conflicts";
 import { isPrivateCIDR } from "../functions/is-private-network";
+import type { Network } from "~/types/network";
 
 type Store = {
   mode: "Networks" | "Devices";
@@ -107,7 +106,7 @@ export default {
       networks: [],
       selectedNetwork: null,
       conflicts: [],
-      mode: "Networks",
+      mode: "Networks"
     };
   },
   mounted() {
@@ -126,7 +125,7 @@ export default {
       // Upgrade selected network if panel is open
       if (this.selectedNetwork) {
         const selectedNetwork = this.networks
-          .filter((network) => network.name === this.selectedNetwork?.name)
+          .filter(network => network.name === this.selectedNetwork?.name)
           .at(0);
         if (selectedNetwork) {
           this.selectedNetwork = selectedNetwork;
@@ -152,14 +151,14 @@ export default {
       // Upgrade selected network if panel is open
       if (this.selectedNetwork) {
         const selectedNetwork = this.networks
-          .filter((network) => network.name === this.selectedNetwork?.name)
+          .filter(network => network.name === this.selectedNetwork?.name)
           .at(0);
         if (selectedNetwork) {
           this.selectedNetwork = selectedNetwork;
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

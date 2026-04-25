@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 
 import { calculateNetworkDetails } from "./calculate-network-details";
 
@@ -8,6 +8,6 @@ describe("coucou", () => {
     (cidr, firstIP, lastIP) => {
       expect(calculateNetworkDetails(cidr).firstIP).toEqual(firstIP);
       expect(calculateNetworkDetails(cidr).lastIP).toEqual(lastIP);
-    }
+    },
   );
 });
