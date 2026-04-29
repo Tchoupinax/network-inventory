@@ -37,7 +37,7 @@ importers:
         specifier: 10.2.1
         version: 10.2.1(jiti@2.6.1)
       eslint-config-tchoupinax:
-        specifier: ^2.4.0
+        specifier: 2.5.0
         version: 2.5.0(@typescript-eslint/utils@8.59.1(eslint@10.2.1(jiti@2.6.1))(typescript@5.9.3))(eslint-import-resolver-node@0.3.10)(jiti@2.6.1)(typescript@5.9.3)
       vitest:
         specifier: 4.1.5
@@ -6939,8 +6939,8 @@ snapshots:
 
   '@typescript-eslint/project-service@8.56.0(typescript@5.9.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.56.0(typescript@5.9.3)
-      '@typescript-eslint/types': 8.56.0
+      '@typescript-eslint/tsconfig-utils': 8.59.1(typescript@5.9.3)
+      '@typescript-eslint/types': 8.59.1
       debug: 4.4.3
       typescript: 5.9.3
     transitivePeerDependencies:
