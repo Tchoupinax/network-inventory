@@ -66,7 +66,7 @@ import type { PropType } from "vue";
 
 import {
   calculateNetworkDetails,
-  type Details
+  type Details,
 } from "../functions/calculate-network-details";
 import type { Conflict } from "../functions/check-conflicts";
 import type { Network } from "~/types/network";
@@ -75,18 +75,18 @@ export default {
   props: {
     network: {
       required: true,
-      type: Object as PropType<Network>
+      type: Object as PropType<Network>,
     },
     conflicts: {
       required: true,
-      type: Array as PropType<Array<Conflict>>
-    }
+      type: Array as PropType<Array<Conflict>>,
+    },
   },
   computed: {
     details(): Details {
       return calculateNetworkDetails(this.network.cidr);
-    }
-  }
+    },
+  },
 };
 </script>
 

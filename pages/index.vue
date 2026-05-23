@@ -106,7 +106,7 @@ export default {
       networks: [],
       selectedNetwork: null,
       conflicts: [],
-      mode: "Networks"
+      mode: "Networks",
     };
   },
   mounted() {
@@ -157,8 +157,8 @@ export default {
           this.selectedNetwork = selectedNetwork;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
