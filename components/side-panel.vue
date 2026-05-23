@@ -72,12 +72,12 @@ export default {
   props: {
     opened: {
       required: true,
-      type: Boolean
+      type: Boolean,
     },
     network: {
       required: true,
-      type: Object
-    }
+      type: Object,
+    },
   },
   emits: ["close"],
   mounted() {
@@ -95,8 +95,8 @@ export default {
     });
   },
   methods: {
-    isIpInCidr
-  }
+    isIpInCidr,
+  },
 };
 </script>
 
