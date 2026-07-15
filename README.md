@@ -17,3 +17,8 @@ type Network = {
   devices?: Array<{ name: string; ip: string }>;
 };
 ```
+
+## Alternatives
+
+- https://subnetplanner.net
+- 
